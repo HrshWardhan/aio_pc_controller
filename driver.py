@@ -2,7 +2,7 @@ import socket
 import pyautogui
 import time
 
-pyautogui.PAUSE = 0.01
+pyautogui.PAUSE = 0.001
 
 def main():
 	s = socket.socket()      
@@ -44,13 +44,28 @@ def main():
 			for msg in message:
 				msg = msg.split("&")
 				print("DEBUG: ",msg)
+<<<<<<< Updated upstream
 				if(msg[0] == 'wasd'):
 					wasd(msg[1], msg[2])
 				
+=======
+				if(msg[0]=='wasd'):
+					wasd(msg[1])
+				elif(msg[0]=='tilt'):
+					if(len(msg)<3):
+						continue
+					elif(msg[2]==''):
+						continue
+					elif msg[1]=='+':
+						tilt(True,float(msg[2]))
+					elif msg[1]=='-':
+						tilt(False,float(msg[2]))
+>>>>>>> Stashed changes
 			c.send(bytes('Thank you for connecting', "utf-8"))
 			
 		c.close()
 
+<<<<<<< Updated upstream
 def wasd(type, msg):
 	if(type == 'down'):
 		pyautogui.keyDown(msg)
@@ -58,5 +73,27 @@ def wasd(type, msg):
 		pyautogui.keyUp(msg)
 	
 
+=======
+def wasd(message):
+	print(message)
+	pyautogui.keyDown(message)
+	time.sleep(0.5)
+	pyautogui.keyUp(message)
+
+def press(duty_ratio,button):
+	j = 15
+	for i in range (j-6):
+		pyautogui.keyDown(button)
+		time.sleep((0.15/(j))*duty_ratio)
+		pyautogui.keyUp(button)
+def tilt(message,value):
+	if message:
+		print('a')
+		press(value/14,'a')
+	else:
+		print('d')
+		press(value/14,'d')
+		
+>>>>>>> Stashed changes
 if __name__=="__main__":
 	main()
