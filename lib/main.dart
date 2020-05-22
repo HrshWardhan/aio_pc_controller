@@ -4,6 +4,7 @@ import 'package:sensors/sensors.dart';
 import 'dart:async';
 Socket sock;
 double gcurr = 0;
+bool ovisit=false;
 bool tiltcontrol = false;
 void main() async {
   // modify with your true address/port
@@ -75,7 +76,6 @@ class HomeScreen extends StatelessWidget {
 void tilt(){
   final subscription = accelerometerEvents.listen((AccelerometerEvent event) {
     gcurr = event.y;
-    print(gcurr);
   });
 }
 void tsend(){
@@ -92,12 +92,15 @@ class Gyro extends StatefulWidget{
 class _GyroState extends State<Gyro> {
   @override
   Widget build(BuildContext context){
-    tilt();
-    Timer.periodic(Duration(seconds:1),(Timer t){
-      if(tiltcontrol){
-        tsend();
-      }
-    });
+    if(!ovisit){
+      tilt();
+      Timer.periodic(Duration(milliseconds:150),(Timer t){
+        if(tiltcontrol){
+          tsend();
+        }
+      });
+    }
+    ovisit=true;
     return Scaffold(
       appBar: AppBar(
         title: Text("Tilt to Control"),

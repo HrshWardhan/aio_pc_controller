@@ -61,12 +61,12 @@ def tilt(message):
 	if message:
 		print('a')
 		pyautogui.keyDown('a')
-		time.sleep(0.05)
+		time.sleep(0.074)
 		pyautogui.keyUp('a')
 	else:
 		print('d')
 		pyautogui.keyDown('d')
-		time.sleep(0.05)
+		time.sleep(0.074)
 		pyautogui.keyUp('d')
 		
 if __name__=="__main__":
