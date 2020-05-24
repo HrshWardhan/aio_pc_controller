@@ -21,8 +21,8 @@ class myThread (threading.Thread):
 			if(button!='$'):
 				pyautogui.keyDown(button)
 				time.sleep((0.15/(25))*duty_ratio)
-				time.sleep((0.15/(25))*(1-duty_ratio))
 				pyautogui.keyUp(button)
+				time.sleep((0.15/(25))*(1-duty_ratio))
 
 thread1 = myThread(1, "Thread-1", 1)
 
