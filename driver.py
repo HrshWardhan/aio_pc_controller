@@ -21,8 +21,8 @@ class myThread (threading.Thread):
 			if(button!='$'):
 				pyautogui.keyDown(button)
 				time.sleep((0.15/(25))*duty_ratio)
-				pyautogui.keyUp(button)
 				time.sleep((0.15/(25))*(1-duty_ratio))
+				pyautogui.keyUp(button)
 
 thread1 = myThread(1, "Thread-1", 1)
 
@@ -69,8 +69,8 @@ def main():
     					wasd(msg[1], msg[2])
 				elif(msg[0]=='tilt'):
 					if(len(msg)==2):
-						print(msg[1])
-						if(msg[1]==0):
+						if(msg[1]=='0'):
+							global button
 							button='$'
 					if(len(msg)<3):
 						continue
