@@ -26,10 +26,10 @@ class myThread (threading.Thread):
 				if(duty_ratio!=0):
 					keyboard.press(sub)
 					#pyautogui.keyDown(sub)
-					time.sleep(0.03*duty_ratio)
+					time.sleep(0.005*duty_ratio)
 					keyboard.release(sub)
 					#pyautogui.keyUp(button)
-					time.sleep((0.03)*(1-duty_ratio))
+					time.sleep((0.005)*(1-duty_ratio))
 
 thread1 = myThread(1, "Thread-1", 1)
 

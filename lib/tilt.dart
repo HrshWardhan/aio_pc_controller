@@ -16,10 +16,10 @@ double min(double a,double b){
   }
 }
 void tsend(){
-  if(gcurr>1){
+  if(gcurr>0.4){
     String s = min(gcurr/10,1).toString();
     sock.write("tilt&+&"+s+'%');
-  }else if(gcurr<-1){
+  }else if(gcurr<-0.4){
     String s =  min((-1*gcurr)/10,1).toString();
     sock.write("tilt&-&"+s+'%');
   }else{
@@ -35,7 +35,7 @@ class _GyroState extends State<Gyro> {
   Widget build(BuildContext context){
     if(!ovisit){
       tilt();
-      Timer.periodic(Duration(milliseconds:150),(Timer t){
+      Timer.periodic(Duration(milliseconds:50),(Timer t){
         if(tiltcontrol){
           tsend();
         }
