@@ -8,14 +8,23 @@ void tilt(){
     gcurr = event.y;
   });
 }
-void tsend(){
-  if(gcurr>0){
-    String s = gcurr.toString();
-    sock.write("tilt&+&"+s+'%');
-  }else if(gcurr<0){
-    String s = (-1*gcurr).toString();
-    sock.write("tilt&-&"+s+'%');
+double min(double a,double b){
+  if(a>b){
+    return b;
+  }else{
+    return a;
   }
+}
+void tsend(){
+  if(gcurr>1){
+    String s = min(gcurr/10,1).toString();
+    sock.write("tilt&+&"+s+'%');
+  }else if(gcurr<-1){
+    String s =  min((-1*gcurr)/10,1).toString();
+    sock.write("tilt&-&"+s+'%');
+  }else{
+    sock.write("tilt&+&"+'0'+'%');
+  } 
 }
 class Gyro extends StatefulWidget{
   @override

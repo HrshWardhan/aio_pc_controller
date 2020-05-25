@@ -3,11 +3,13 @@ import socket
 import pyautogui
 import time
 import threading
+from pynput.keyboard import Key, Controller
 
+keyboard = Controller() 
 pyautogui.PAUSE = 0.01
 button ='$'
 duty_ratio = 0
-
+sub = '$'
 
 class myThread (threading.Thread):
 	def __init__(self, threadID, name, counter):
@@ -17,12 +19,17 @@ class myThread (threading.Thread):
 		self.counter = counter
 
 	def run(self):
+		global sub
 		while(True):
 			if(button!='$'):
-				pyautogui.keyDown(button)
-				time.sleep((0.15/(25))*duty_ratio)
-				pyautogui.keyUp(button)
-				time.sleep((0.15/(25))*(1-duty_ratio))
+				sub = button
+				if(duty_ratio!=0):
+					keyboard.press(sub)
+					#pyautogui.keyDown(sub)
+					time.sleep(0.03*duty_ratio)
+					keyboard.release(sub)
+					#pyautogui.keyUp(button)
+					time.sleep((0.03)*(1-duty_ratio))
 
 thread1 = myThread(1, "Thread-1", 1)
 
@@ -85,9 +92,9 @@ def main():
 
 def wasd(type, msg):
 	if(type == 'down'):
-		pyautogui.keyDown(msg)
+		keyboard.press(msg)
 	else:
-		pyautogui.keyUp(msg)
+		keyboard.release(msg)
 
 def press(duty_ratio,button):
 	j = 15
@@ -99,12 +106,13 @@ def press(duty_ratio,button):
 
 def tilt(message,value):
 	global button
+	global duty_ratio
 	if message:
 		button = 'a'
-		duty_ratio = value/14
+		duty_ratio = value
 	else:
 		button = 'd'
-		duty_ratio = value/14
+		duty_ratio = value
 
 if __name__=="__main__":
 	main()
