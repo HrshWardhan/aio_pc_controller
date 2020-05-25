@@ -17,10 +17,10 @@ double min(double a,double b){
 }
 void tsend(){
   if(gcurr>0.4){
-    String s = min(gcurr/10,1).toString();
+    String s = min(gcurr/7,1).toString();
     sock.write("tilt&+&"+s+'%');
   }else if(gcurr<-0.4){
-    String s =  min((-1*gcurr)/10,1).toString();
+    String s =  min((-1*gcurr)/7,1).toString();
     sock.write("tilt&-&"+s+'%');
   }else{
     sock.write("tilt&+&"+'0'+'%');
