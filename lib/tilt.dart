@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 import 'package:sensors/sensors.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 void tilt(){
   final subscription = accelerometerEvents.listen((AccelerometerEvent event) {
     gcurr = event.y;
@@ -106,10 +107,10 @@ class _GyroState extends State<Gyro> {
         Center(
           child:GestureDetector(
             onTapDown: (_) {
-              _send('down&d');
+              _send('down&s');
             },
             onTapUp: (_) {
-               _send('up&d');
+               _send('up&s');
             },
             child: Container(
               color: Colors.blue,
