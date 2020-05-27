@@ -4,7 +4,6 @@ import pyautogui
 import time
 import threading
 from pynput.keyboard import Key, Controller
-#testing
 keyboard = Controller() 
 pyautogui.PAUSE = 0.01
 button ='$'
